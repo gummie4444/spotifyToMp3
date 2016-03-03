@@ -10,21 +10,21 @@ app.config(function($httpProvider,$provide) {
 
 
 
-    $provide.factory('myHttpInterceptor', function($q) {
+    $provide.factory('myHttpInterceptor', function($q,$location) {
         var networkPromise = null;
 
         return {
             'request': function(config) {
-
                 return config;
             },
             'responseError': function(response) {
                 if (response.status === 401) {
                     console.log(response, "401 villa")
+                    $location.path("/login");
                 }
 
                 if (response.status === 0) {
-
+                    console.log("serverR")
 
                 }
 
