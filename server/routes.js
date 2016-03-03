@@ -34,35 +34,46 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
     })
   }
 
-
   var downloadSong = function(youtubeLink,songName){
       var video = youtubedl(youtubeLink,
           // Optional arguments passed to youtube-dl.
              // Optional arguments passed to youtube-dl.
              //TODO CONVERT THIS BETTER
-          ['--extract-audio','--audio-format','mp3'],
-          
-          // Additional options can be given for calling `child_process.execFile()`.
+             ['--format=171'],
+
+             //AUDIO formats-
+             /*
+              format 249 : opus/webem
+              format 250: opus/webm
+              format 140: vorbis/webm 
+                format 251: mp4a 
+              format: 278  webm             */            
+
+                     
+              // Additional options can be given for calling `child_process.execFile()`.
 
           // Additional options can be given for calling `child_process.execFile()`.
           { cwd: __dirname });
 
+
         // Will be called when the download starts.
-        video.on('info', function(info) {
+              video.on('info', function(info) {
           console.log('Download started');
           console.log('filename: ' + info._filename);
           console.log('size: ' + info.size);
         });
 
+
+
+
         console.log("songName",songName)
-        video.pipe(fs.createWriteStream(__dirname+'/songs/'+songName.replace(/\s+/g, '')+'.mp3'));
+        video.pipe(fs.createWriteStream(__dirname+'/songs/'+songName.replace(/\s+/g, '')+'.webm'));
 
         video.on('end', function() {
           console.log('finished downloading!');
         });
 
             };
-
 
   app.post('/downloadSongs',function(req,res){
 

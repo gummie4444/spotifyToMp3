@@ -1,21 +1,21 @@
-angular.module('LoginController',[])
+angular.module('LoginController', [])
 
-.controller('LoginCtr', function($scope,httpService,Spotify,$location) {
+.controller('LoginCtr', function($scope, httpService, Spotify, $location) {
 
-$scope.goToLogin = function(){
-    console.log("login");
+    $scope.goToLogin = function() {
+        console.log("login");
 
-    Spotify.login().then(function (data) {
-        console.log(data);
-        $location.path("#/main")
+        Spotify.login().then(function(data) {
+            console.log(data);
+            $location.path("#/main")
 
-      }, function () {
-        console.log('didn\'t log in');
+        }, function() {
+            console.log('didn\'t log in');
 
 
-      })
+        })
 
-}
-	
+    }
+
 
 });
