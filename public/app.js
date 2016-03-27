@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'MainController', 'LoginController', 'HttpService', 'spotify']);
+var app = angular.module('app', ['ngRoute', 'MainController', 'LoginController', 'HttpService', 'spotify','vs-repeat']);
 
 app.config(function($httpProvider,$provide) {
 
@@ -53,7 +53,6 @@ app.config(function(SpotifyProvider) {
 //routing
 app.config(['$locationProvider', '$routeProvider',
     function($location, $routeProvider) {
-
 
         $routeProvider.
         when('/login', {

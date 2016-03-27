@@ -9,7 +9,8 @@ angular.module('HttpService',[])
         },
 
         downloadSongs:function(tracks){
-          return $http.post('/downloadSongs',tracks);
+
+          return $http.post('/downloadSongs',tracks,{responseType:'arraybuffer'});
         }
 
       };

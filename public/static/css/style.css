@@ -1,6 +1,6 @@
- @font-face { font-family: 'Quicksand'; src: url('../quicksand/Quicksand-Regular.otf'); } 
- @font-face { font-family: 'Quicksand'; font-weight: bold; src: url('../quicksand/Quicksand-BoldItalic.otf');}
-  @font-face { font-family: 'Quicksand'; font-style:italic; src: url('../quicksand/Quicksand-Italic.otf');}
+ @font-face { font-family: 'Quicksand'; src: url('../fonts/quicksand/Quicksand-Regular.otf'); } 
+ @font-face { font-family: 'Quicksand'; font-weight: bold; src: url('../fonts/quicksand/Quicksand-BoldItalic.otf');}
+  @font-face { font-family: 'Quicksand'; font-style:italic; src: url('../fonts/quicksand/Quicksand-Italic.otf');}
 
 /**
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
@@ -25,6 +25,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+
 }
 
 html,body{
@@ -38,12 +39,16 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
-		background: url("../images/background.jpg"); no-repeat center center fixed; 
+    line-height: 1;
+  background: url("../images/background.jpg"); no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+}
+::-webkit-scrollbar { 
+    display: none; 
 }
 ol, ul {
 	list-style: none;
@@ -66,12 +71,19 @@ table {
 
 
 
-
-.loginContainer{
-
-	height:100%;
-	width:100%;
-	display: flex;
+/**
+Gummi css
+**/
+.container{
+	    text-align: center;
+    /* width: 100%; */
+    height: 100%;
+    overflow: auto;
+    overflow-y: scroll;
+    /* max-height: 100%; */
+    height: 100%;
+    width: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -83,7 +95,7 @@ table {
     flex-direction:column;
     text-align:center;
 
-height:auto;
+    height:auto;
     width:400px;
     padding:20px;
     background: rgba(0,0,0,0.6);
@@ -91,7 +103,7 @@ height:auto;
 }
 
 .loginButtonLink{
-	    font-size: 24px;
+	 font-size: 24px;
     color: #FAF6EB;
     text-decoration: none;
     margin-top: 10px;
@@ -107,9 +119,8 @@ height:auto;
 	background:#C39D5D;
 }
 
-
 h1{
-	    font-size: 46px;
+    font-size: 46px;
     padding: 20px;
     color: #FAF6EB;
     margin-bottom: 20px;
@@ -119,22 +130,61 @@ h2{
 	padding:10px;
 }
 
+.playlistContainer{
+    height:100%;
+    width:100%;
+}
 
 .mainPlaylist{
-	    color: white;
-    width: 70%;
-    height: 18px;
+	color: white;
     padding: 5px;
-    cursor: pointer;
     margin: 1px;
-    background: gray;
     border-radius: 9px;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.mainPlaylistInfo
+{
+    height:100px;
+    width:65%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background: rgba(109,108,108,0.5);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.mainPlaylistImage{
+    height:100%;
+    flex:auto 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playlistImage{
+    height:100%;
+    -webkit-transition: opacity 1s ease 0s;
+    -moz-transition: opacity 1s ease 0s;
+    -o-transition: opacity 1s ease 0s;
+    transition: opacity 1s ease 0s;
+}
+.mainPlaylistName{
+    font-size:24px;
+
+    flex:4 0 0;
 }
 
 .mainPlaylist:active,.mainPlaylist:activated{
 	background:#6D6C6C;
 }
 
+.vs-repeat-after-content{
+    display:none !important;
+}
 
 
 
