@@ -30,9 +30,14 @@ Spotify.getCurrentUser().then(function(data){
 		   		httpService.downloadSongs(data.items).then(function(result){
 
 		   			console.log(result.data,"result");
-		   			var file = new Blob([result], {type: 'application/zip'});
+		   			var file = new Blob([result.data], {type: "application/octet-stream"});
 		            console.log(file);
+
+		            saveAs(file,'re.zip');
+		            return;
 		            var fileURL = URL.createObjectURL(file);
+
+
 
             		var a = document.createElement("a");
 	            	document.body.appendChild(a);

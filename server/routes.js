@@ -138,7 +138,7 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
       //TODO:for loop through the song's and append them to the zip
 
       zip.append('Some text to go in file 1.', { name: '1.txt' });
-      zip.append('Some text to go in file 2. I go in a folder!', { name: 'somefolder/2.txt' });
+      //zip.append('Some text to go in file 2. I go in a folder!', { name: 'somefolder/2.txt' });
       zip.finalize();
 
 

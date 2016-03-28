@@ -10,7 +10,14 @@ angular.module('HttpService',[])
 
         downloadSongs:function(tracks){
 
-          return $http.post('/downloadSongs',tracks,{responseType:'arraybuffer'});
+
+          return $http({
+                  method: 'POST',
+                  url: 'downloadSongs',
+                  data: tracks,
+                  headers: {
+                      'Content-Type': 'arraybuffer'
+                  }})
         }
 
       };
