@@ -1,6 +1,6 @@
 angular.module('MainController',[])
 
-.controller('MainCtr', function($scope,Spotify,httpService,$location) {
+.controller('MainCtr', function($scope,Spotify,httpService,$location,$timeout) {
 
 
 
@@ -25,15 +25,33 @@ Spotify.getCurrentUser().then(function(data){
 		Spotify
 		  .getPlaylistTracks($scope.user.id, id)
 		  .then(function (data) {
-		  		console.log(data);
-		   		httpService.downloadSongs(data.items).success(function(result){
+	  		console.log(data,"dataFrom SPotify");
+	   		httpService.downloadSongs(data.items).then(function(result){
 
-		   			var file = new Blob([result], {type: "application/octet-stream"});
-		            saveAs(file,name+".zip");
-		            item.loading = false;
-		            return;
-		   		});
+	   			var file = new Blob([result.data], {type: "application/octet-stream"});
+	            saveAs(file,name+".zip");
+	            item.loading = false;
+	            return;
+	   		}).catch(function(error){
+	   			console.log("downloadSong error")
 
+	   			item.loading = false;
+			  	item.error = true;
+
+			  	$timeout(function(){
+			  		item.error = false;
+			  		item.loading = false;
+			  	},5000);
+			});
+
+		  }).catch(function(){
+		  	item.loading = false;
+
+		  	item.error = true;
+
+		  	$timeout(function(){
+			  		item.error = false;
+			  	},5000);
 		  });
 	}
 	$scope.logout= function(){

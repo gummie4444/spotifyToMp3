@@ -7,10 +7,10 @@
 					<img class ="playlistImage" ng-src = "{{playlist.images[0].url}}">
 				</div>
 				
-				<div ng-if="!playlist.loading" class ="mainPlaylistName">
+				<div ng-if="!playlist.loading && !playlist.error" class ="mainPlaylistName">
 						{{playlist.name}}
 				</div>
-				<div class ="mainPlaylistName" ng-if="playlist.loading">
+				<div class ="mainPlaylistName" ng-if="playlist.loading && !playlist.error">
 					<div class="spinner">
 					  <div class="rect1"></div>
 					  <div class="rect2"></div>
@@ -18,6 +18,10 @@
 					  <div class="rect4"></div>
 					  <div class="rect5"></div>
 					</div>
+				</div>
+
+				<div class ="mainPlaylistLoadingIcon" ng-if="playlist.error">
+					Something went wrong while downloading playlist :(
 				</div>
 
 
