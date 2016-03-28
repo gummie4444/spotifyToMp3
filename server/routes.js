@@ -38,7 +38,8 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
               console.log(result.items[0].id);
               resolve(downloadSong('http://www.youtube.com/watch?v='+result.items[0].id.videoId,song));
             }
-            reject(); //TODO:add some error msg
+            console.log("did not find anything");
+            resolve([]); //TODO:add some error msg
 
           }
         });
@@ -90,6 +91,7 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
 
           //TODO: does this work?
           video.on('error',function(error){
+            console.log("DownloadVideoError")
             reject(error);
           })
       });
