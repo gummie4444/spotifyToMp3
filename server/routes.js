@@ -51,12 +51,14 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
         var video = youtubedl(youtubeLink,
           //Optional arguments passed to youtube-dl.
           //TODO CONVERT THIS BETTER (iff the video does not suport the format what then?)
-          ['--format=171'],
+          ['--format=140'],
 
            //AUDIO formats to consider-
            /*
+
             format 249: opus/webem
             format 250: opus/webm
+            format 171: webM
             format 140: vorbis/webm 
             format 251: mp4a 
             format 278: webm 
@@ -144,7 +146,7 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
       for (var i = response.length - 1; i >= 0; i--) {
         if(response[i] && response[i].song){
 
-          zip.append(response[i].song,{name:'songs/'+response[i].songName+'.webm'});
+          zip.append(response[i].song,{name:'songs/'+response[i].songName+'.m4a'});
         }
       };
 
