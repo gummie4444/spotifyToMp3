@@ -5,10 +5,8 @@ angular.module('MainController',[])
 
 
 Spotify.getCurrentUser().then(function(data){
+
 	$scope.user = data;
-
-
-
 	Spotify.getUserPlaylists(data.id).then(function(data2){
 
 	    $scope.playlists = data2.items;
@@ -20,42 +18,38 @@ Spotify.getCurrentUser().then(function(data){
 		console.log("doingThis")
 	}
 
-	$scope.downloadPlaylist= function(id){
+	$scope.downloadPlaylist= function(id,name){
 		console.log("downloadPlaylis")
-
+		var item = search(id,$scope.playlists);
+		item.loading = true;
 		Spotify
 		  .getPlaylistTracks($scope.user.id, id)
 		  .then(function (data) {
 		  		console.log(data);
-		   		httpService.downloadSongs(data.items).then(function(result){
+		   		httpService.downloadSongs(data.items).success(function(result){
 
-		   			console.log(result.data,"result");
-		   			var file = new Blob([result.data], {type: "application/octet-stream"});
-		            console.log(file);
-
-		            saveAs(file,'re.zip');
+		   			var file = new Blob([result], {type: "application/octet-stream"});
+		            saveAs(file,name+".zip");
+		            item.loading = false;
 		            return;
-		            var fileURL = URL.createObjectURL(file);
-
-
-
-            		var a = document.createElement("a");
-	            	document.body.appendChild(a);
-	            	a.style = "display: none";
-	                a.href = fileURL;
-	                a.download = "myfile.zip";
-	                a.click();
 		   		});
 
 		  });
 	}
-
 	$scope.logout= function(){
-
 		localStorage.clear();
 		$location.path('/login');
 
 	}
+
+	function search(idKey, myArray){
+    	for (var i=0; i < myArray.length; i++) {
+		        if (myArray[i].id === idKey) {
+		            return myArray[i];
+		        }
+		    }
+	}
+
 
 
 });

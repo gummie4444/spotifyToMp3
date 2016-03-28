@@ -1,16 +1,26 @@
 <div class ="container" >
-
 	<div vs-repeat vs-scrolled-to-end="{{doThis()}}" class= "playlistContainer">
 
 		<div class ="mainPlaylist" ng-repeat="playlist in playlists">
-			<div ng-click ="downloadPlaylist(playlist.id);" class ="mainPlaylistInfo">
+			<div ng-disable ="loading" ng-click ="downloadPlaylist(playlist.id,playlist.name);" class ="mainPlaylistInfo">
 				<div class ="mainPlaylistImage">
 					<img class ="playlistImage" ng-src = "{{playlist.images[0].url}}">
 				</div>
 				
-				<div class ="mainPlaylistName">
+				<div ng-if="!playlist.loading" class ="mainPlaylistName">
 						{{playlist.name}}
 				</div>
+				<div class ="mainPlaylistName" ng-if="playlist.loading">
+					<div class="spinner">
+					  <div class="rect1"></div>
+					  <div class="rect2"></div>
+					  <div class="rect3"></div>
+					  <div class="rect4"></div>
+					  <div class="rect5"></div>
+					</div>
+				</div>
+
+
 
 			</div>
 

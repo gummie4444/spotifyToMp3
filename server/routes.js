@@ -8,6 +8,8 @@ module.exports = function(app){
 var youtubedl = require('youtube-dl');
 var YouTube = require('youtube-node');
 var youTube = new YouTube();
+var StringStream = require('string-stream');
+var ffmpeg = require('fluent-ffmpeg');
 
 var mkdirp = require('mkdirp');
 var fs = require('fs');
@@ -71,17 +73,19 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
           });
 
           //TODO: does this work?
-          var string = '';
+          var bufs = [];
           video.on('data',function(buffer){
+           // console.log(buffer.toString());
             if(buffer){
-              string += buffer;
+              bufs.push(buffer);
             }
           });
 
           video.on('end', function() {
             console.log('finished downloading!');
             //TODO:RETURN THE RIGHT RESULT
-            resolve("string");
+            var buf = Buffer.concat(bufs);
+            resolve({song:buf,songName:songName});
           });
 
           //TODO: does this work?
@@ -117,27 +121,39 @@ youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
       //Tell the response that it's a zip file
       res.writeHead(200, {
           'Content-Type': 'application/zip',
-          'Content-disposition': 'attachment; filename=myfile.zip'
+          'Content-Disposition': 'attachment; filename=myfile.zip;'
+
       });
 
       var zip = Archiver('zip');
 
-        zip.on('error', function(err) {
-          res.status(500).send({error: err.message});
-        });
+      zip.on('error', function(err) {
+        res.status(500).send({error: err.message});
+      });
 
-        //on stream closed we can end the request
-        zip.on('end', function() {
-          console.log('Archive wrote %d bytes', zip.pointer());
-        });
+      //on stream closed we can end the request
+      zip.on('end', function() {
+        console.log('Archive wrote %d bytes', zip.pointer());
+      });
 
       // Send the file to the page output.
       zip.pipe(res);
 
+      for (var i = response.length - 1; i >= 0; i--) {
+        if(response[i] && response[i].song){
+
+          zip.append(response[i].song,{name:'songs/'+response[i].songName+'.webm'});
+        }
+      };
+
+
+
       //TODO:Do we need todo something to convert buffer to webm/mp3?
       //TODO:for loop through the song's and append them to the zip
 
-      zip.append('Some text to go in file 1.', { name: '1.txt' });
+      //zip.append("test", {name:'dynamic.txt'})
+
+      //zip.append('Some text to go in file 1.', { name: 'test/1.txt' });
       //zip.append('Some text to go in file 2. I go in a folder!', { name: 'somefolder/2.txt' });
       zip.finalize();
 
