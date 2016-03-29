@@ -39,7 +39,7 @@ app.config(function($httpProvider,$provide) {
 
 app.config(function(SpotifyProvider) {
     SpotifyProvider.setClientId('2db32e7a77be4146a16aca3ecc3e02e4');
-    SpotifyProvider.setRedirectUri('http://localhost:8888/callback.html');
+    SpotifyProvider.setRedirectUri('http://bergsteinsson.is/callback.html');
     SpotifyProvider.setScope('user-read-private playlist-read-private');
     // If you already have an auth token
     console.log(localStorage["spotify-token"], "token")

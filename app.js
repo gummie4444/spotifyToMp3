@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+  res.setHeader('Access-Control-Allow-Origin', 'http://bergsteinsson.is');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -45,4 +45,4 @@ app.use(function (req, res, next) {
 require('./server/routes.js')(app);
 
 console.log('Listening on 8888');
-app.listen(8888);
+app.listen(80);
