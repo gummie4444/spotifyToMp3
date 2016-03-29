@@ -8,7 +8,6 @@ module.exports = function(app){
 var youtubedl = require('youtube-dl');
 var YouTube = require('youtube-node');
 var youTube = new YouTube();
-var StringStream = require('string-stream');
 var ffmpeg = require('fluent-ffmpeg');
 
 var mkdirp = require('mkdirp');
