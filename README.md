@@ -1,5 +1,7 @@
 # Spotify to mp3
 
+Website to download spotify playlist to your computer
+
 
 ## Installation
 
